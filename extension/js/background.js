@@ -93,33 +93,60 @@ chrome.webRequest.onBeforeRequest.addListener(
     //     return details.url;
     // }
 
-    let url = details.url.replace("http://", "https://");
-    url = url.replace("ajax.googleapis.com", "ajax.loli.net");
-    url = url.replace("fonts.googleapis.com", "fonts.loli.net");
+    let url = details.url.replace("http://",          "https://");
+    /* 中科大 */
+    //url = url.replace("ajax.googleapis.com",          "ajax.proxy.ustclug.org");          // Google 前端公共库
+    //url = url.replace("fonts.googleapis.com",         "fonts.proxy.ustclug.org");         // Google 字体
+    //url = url.replace("fonts.gstatic.com",            "fonts-gstatic.proxy.ustclug.org");
+    //url = url.replace("themes.googleusercontent.com", "google-themes.proxy.ustclug.org");
+    /* 极客族 */
+    //url = url.replace("ajax.googleapis.com",          "gapis.geekzu.org/ajax");     // Google 前端公共库
+    //url = url.replace("fonts.googleapis.com",         "fonts.geekzu.org");          // Google 字体
+    //url = url.replace("fonts.gstatic.com",            "gapis.geekzu.org/g-fonts");
+    //url = url.replace("themes.googleusercontent.com", "gapis.geekzu.org/g-themes");
+    //url = url.replace("www.gravatar.com/avatar",      "sdn.geekzu.org/avatar");     // Gravatar 头像
+    //url = url.replace("secure.gravatar.com/avatar",   "sdn.geekzu.org/avatar");
+    /* 烧饼博客 */
+    url = url.replace("ajax.googleapis.com",          "ajax.loli.net");     // Google 前端库
+    url = url.replace("cdn.bootcdn.net",              "cdnjs.loli.net");    // CDNJS
+    url = url.replace("cdnjs.cloudflare.com",         "cdnjs.loli.net");
+    url = url.replace("fonts.googleapis.com",         "fonts.loli.net");    // Google 字体
+    url = url.replace("fonts.gstatic.com",            "gstatic.loli.net");
     url = url.replace("themes.googleusercontent.com", "themes.loli.net");
-    url = url.replace("fonts.gstatic.com", "gstatic.loli.net");
-    url = url.replace(
-      "www.google.com/recaptcha/",
-      "www.recaptcha.net/recaptcha/"
-    );
-    url = url.replace("secure.gravatar.com", "gravatar.loli.net");
-    url = url.replace("www.gravatar.com", "gravatar.loli.net");
-    url = url.replace(
-      "maxcdn.bootstrapcdn.com/bootstrap/",
-      "cdn.bootcdn.net/ajax/libs/twitter-bootstrap/"
-    );
-    return { redirectUrl: url };
+    url = url.replace("www.gravatar.com",             "gravatar.loli.net"); // Gravatar 头像
+    url = url.replace("secure.gravatar.com",          "gravatar.loli.net");
+    /* 知乎 (包不全，目前已知没有 node-forge 包) */
+    //url = url.replace("unpkg.com",                  "unpkg.zhimg.com");   // UNPKG
+    //url = url.replace("cdn.jsdelivr.net/npm/",      "unpkg.zhimg.com/");  // jsDelivr
+    /* 百度 */
+    url = url.replace("unpkg.com",                    "code.bdstatic.com/npm");  // UNPKG
+    url = url.replace("cdn.jsdelivr.net/npm/",        "code.bdstatic.com/npm/"); // jsDelivr
+    /* Google */
+    url = url.replace("www.google.com/recaptcha/",          "www.recaptcha.net/recaptcha/");  // reCAPTCHA
+    /* 七牛云 */
+    url = url.replace("maxcdn.bootstrapcdn.com/bootstrap/", "cdn.staticfile.org/bootstrap/"); // Bootstrap
+    return {
+        redirectUrl: url
+    };
   },
   {
     urls: [
-      "*://ajax.googleapis.com/*",
-      "*://fonts.googleapis.com/*",
-      "*://themes.googleusercontent.com/*",
+      /* 烧饼博客 */
+      "*://ajax.googleapis.com/*",               // Google 前端库
+      "*://cdn.bootcdn.net/*",                   // CDNJS
+      "*://cdnjs.cloudflare.com/*",
+      "*://fonts.googleapis.com/*",              // Google 字体
       "*://fonts.gstatic.com/*",
-      "*://www.google.com/recaptcha/*",
+      "*://themes.googleusercontent.com/*",
+      "*://www.gravatar.com/*",                  // Gravatar 头像
       "*://secure.gravatar.com/*",
-      "*://www.gravatar.com/*",
-      "*://maxcdn.bootstrapcdn.com/bootstrap/*",
+      /* 百度 */
+      "*://unpkg.com/*",                         // UNPKG
+      "*://cdn.jsdelivr.net/npm/*",              // jsDelivr
+      /* Google */
+      "*://www.google.com/recaptcha/*",          // reCAPTCHA
+      /* 七牛云 */
+      "*://maxcdn.bootstrapcdn.com/bootstrap/*", // Bootstrap
 
     ],
   },
