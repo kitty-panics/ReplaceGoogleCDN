@@ -223,6 +223,9 @@ chrome.webRequest.onBeforeRequest.addListener(
         /* 百度 */
         url = url.replace("unpkg.com",                    "code.bdstatic.com/npm");  // UNPKG
         url = url.replace("cdn.jsdelivr.net/npm/",        "code.bdstatic.com/npm/"); // jsDelivr
+        /* jsDelivr:
+         * cdn,fastly,testingcf,gcore */
+        //url = url.replace("cdn.jsdelivr.net/",          "fastly.jsdelivr.net/");   // jsDelivr
         /* Google */
         url = url.replace("www.google.com/recaptcha/",          "www.recaptcha.net/recaptcha/");  // reCAPTCHA
         /* 七牛云 */
@@ -249,7 +252,9 @@ chrome.webRequest.onBeforeRequest.addListener(
             "*://www.google.com/recaptcha/*",          // reCAPTCHA
             /* 七牛云 */
             "*://maxcdn.bootstrapcdn.com/bootstrap/*", // Bootstrap
-            // ...test_urls // 测试用例
+
+            // 测试用例
+            // ...test_urls
         ],
     },
     ["blocking"]
